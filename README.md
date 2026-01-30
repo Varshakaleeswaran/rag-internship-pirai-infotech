@@ -1,13 +1,19 @@
-## Internship Details
+# RAG-ChromaDB Internship – Pirai Infotech Pvt Ltd
 
-Company: Pirai Infotech Private Limited  
-Topic: Retrieval Augmented Generation (RAG) using ChromaDB  
-Duration: 15 days  
+## Overview
+This repository documents my 15-day internship on
+Retrieval-Augmented Generation (RAG) using ChromaDB.
 
-## Repository Structure
-- daily_logs → everyday work reports
-- notes → technical learning notes
-- requirements.txt → Python dependencies
+## Structure
+- daily_logs/ – Daily internship reports
+- notes/ – Conceptual notes
+- src/ – Python implementation
+- requirements.txt – Dependencies
 
-## Objective
-To learn and implement Retrieval Augmented Generation (RAG) with basic retrieval using ChromaDB.
+## Day-wise Progress
+- Day 1: Environment setup, GitHub repo, RAG basics
+- Day 2: Embeddings, ChromaDB setup
+
+## Company
+Pirai Infotech Private Limited
+
