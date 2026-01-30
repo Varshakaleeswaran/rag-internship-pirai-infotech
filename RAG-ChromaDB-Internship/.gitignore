@@ -1,0 +1,13 @@
+# Virtual environment
+venv/
+__pycache__/
+
+# Python
+*.pyc
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# ChromaDB local files
+chromadb/
