@@ -13,5 +13,7 @@ chroma/
 chromadb/
 *.sqlite3
 
+chroma_db/
+
 # OS junk
 .DS_Store
