@@ -57,6 +57,22 @@ def retrieve_documents(model, collection, query, n_results=2):
     return results["documents"][0]
 
 
+# -------- Step 4: Answer Generation --------
+def generate_answer(query, retrieved_docs):
+    print("\nGenerating answer using retrieved context...\n")
+
+    context = " ".join(retrieved_docs)
+
+    answer = f"""
+Question:
+{query}
+
+Answer (Generated using retrieved knowledge):
+{context}
+"""
+    return answer
+
+
 # -------- Main Execution --------
 if __name__ == "__main__":
     raw_documents = [
@@ -73,6 +89,5 @@ if __name__ == "__main__":
 
     retrieved_docs = retrieve_documents(model, collection, query)
 
-    print("\nRetrieved Documents:")
-    for doc in retrieved_docs:
-        print("-", doc)
+    answer = generate_answer(query, retrieved_docs)
+    print(answer)
