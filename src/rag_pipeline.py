@@ -1,6 +1,25 @@
+# rag_pipeline.py
+# Day-4: RAG Pipeline with External Documents (TXT files)
+
 from sentence_transformers import SentenceTransformer
 import chromadb
 from chromadb.config import Settings
+import os
+
+
+# -------- Step 0: Load Documents from Folder --------
+def load_documents_from_folder(folder_path):
+    documents = []
+
+    for filename in os.listdir(folder_path):
+        if filename.endswith(".txt"):
+            file_path = os.path.join(folder_path, filename)
+
+            with open(file_path, "r", encoding="utf-8") as file:
+                text = file.read()
+                documents.append(text)
+
+    return documents
 
 
 # -------- Step 1: Text Chunking --------
@@ -23,7 +42,6 @@ def build_vector_store(raw_documents):
     print("Loading embedding model...")
     model = SentenceTransformer("all-MiniLM-L6-v2")
 
-    # Persistent ChromaDB
     client = chromadb.Client(
         Settings(persist_directory="chroma_db")
     )
@@ -32,6 +50,7 @@ def build_vector_store(raw_documents):
 
     print("Chunking documents...")
     documents = []
+
     for doc in raw_documents:
         documents.extend(chunk_text(doc))
 
@@ -50,14 +69,16 @@ def build_vector_store(raw_documents):
 # -------- Step 3: Retrieval --------
 def retrieve_documents(model, collection, query, n_results=2):
     query_embedding = model.encode([query])
+
     results = collection.query(
         query_embeddings=query_embedding.tolist(),
         n_results=n_results
     )
+
     return results["documents"][0]
 
 
-# -------- Step 4: Answer Generation --------
+# -------- Step 4: Simple Answer Generation --------
 def generate_answer(query, retrieved_docs):
     print("\nGenerating answer using retrieved context...\n")
 
@@ -75,19 +96,26 @@ Answer (Generated using retrieved knowledge):
 
 # -------- Main Execution --------
 if __name__ == "__main__":
-    raw_documents = [
-        "RAG stands for Retrieval Augmented Generation. It improves language model responses using retrieved external knowledge.",
-        "ChromaDB is a vector database designed for storing and retrieving embeddings efficiently.",
-        "Sentence Transformers convert text into numerical vector representations.",
-        "RAG systems combine retrieval and generation to improve factual accuracy."
-    ]
+
+    #  Load real documents from data folder
+    raw_documents = load_documents_from_folder("data")
 
     model, collection = build_vector_store(raw_documents)
 
-    query = "What is RAG?"
-    print("\nUser Query:", query)
+    print("\n RAG System Ready! Type 'exit' to stop.\n")
 
-    retrieved_docs = retrieve_documents(model, collection, query)
+    # -------- Interactive Loop --------
+    while True:
+        query = input("Enter your question: ")
 
-    answer = generate_answer(query, retrieved_docs)
-    print(answer)
+        if query.lower() in ["exit", "quit", "stop"]:
+            print("Exiting RAG system...")
+            break
+
+        retrieved_docs = retrieve_documents(model, collection, query)
+
+        answer = generate_answer(query, retrieved_docs)
+
+        print(answer)
+        print("-" * 60)
+
