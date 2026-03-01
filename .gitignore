@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # virtual environment
 venv/
 
@@ -47,4 +47,4 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
->>>>>>> a1a9d377 (Reorganized repo with all RAG projects)
+.env
