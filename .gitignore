@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # virtual environment
 venv/
 
@@ -20,3 +21,30 @@ data/
 chroma_db/
 *.db
 
+=======
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environment
+venv/
+env/
+
+# Environment variables
+.env
+
+# Vector DB / outputs
+vectorstore/
+chroma_db/
+outputs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+>>>>>>> a1a9d377 (Reorganized repo with all RAG projects)

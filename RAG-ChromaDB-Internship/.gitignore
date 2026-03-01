@@ -1,13 +1,23 @@
-# Virtual environment
+# virtual environment
 venv/
-__pycache__/
 
-# Python
+# python cache
+__pycache__/
 *.pyc
 
-# OS files
-.DS_Store
-Thumbs.db
+# environment variables
+.env
 
-# ChromaDB local files
+# chroma database files
+chroma/
 chromadb/
+*.sqlite3
+
+# OS junk
+.DS_Store
+
+data/
+chroma_db/
+*.db
+
+.env
